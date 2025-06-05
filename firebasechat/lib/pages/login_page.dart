@@ -1,17 +1,36 @@
-import 'package:firebasechat/components/my_button.dart';
 import 'package:firebasechat/components/my_text_field.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+import '../components/my_button.dart';
+import '../services/auth/auth_service.dart';
 
-  void login() {}
+class LoginPage extends StatelessWidget {
+  final TextEditingController emailTextController = TextEditingController();
+  final TextEditingController passwordTextController = TextEditingController();
+
+  final Function()? onRegisterNowTap;
+
+  LoginPage({super.key, required this.onRegisterNowTap});
+
+  void login(BuildContext context) async {
+    // get auth service
+    final authService = AuthService();
+
+    try {
+      await authService.signInWithEmailPassword(
+        emailTextController.text,
+        passwordTextController.text,
+      );
+    } catch (e) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(title: Text(e.toString())),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailTextController = TextEditingController();
-    TextEditingController passwordTextController = TextEditingController();
-
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Center(
@@ -27,7 +46,7 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 50),
             // welcome back
             Text(
-              'Welcome back you have been missed!',
+              'Let\'s create an account for you',
               style: TextStyle(
                 color: Theme.of(context).colorScheme.primary,
                 fontSize: 16,
@@ -51,8 +70,7 @@ class LoginPage extends StatelessWidget {
             ),
             const SizedBox(height: 25),
 
-            // login button
-            MyButton(text: "Login", onTap: login),
+            MyButton(text: "Login", onTap: () => login(context)),
             const SizedBox(height: 25),
 
             // register page
@@ -65,11 +83,14 @@ class LoginPage extends StatelessWidget {
                     color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
-                Text(
-                  "Register now",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.primary,
+                GestureDetector(
+                  onTap: onRegisterNowTap,
+                  child: Text(
+                    "Register now",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                 ),
               ],
