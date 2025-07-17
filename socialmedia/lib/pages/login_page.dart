@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:socialmedia/components/my_button.dart';
 import 'package:socialmedia/components/my_text_field.dart';
+import 'package:socialmedia/helper/helper_functions.dart';
 
 class LoginPage extends StatefulWidget {
   final void Function()? onTap;
@@ -18,10 +20,23 @@ class _LoginPageState extends State<LoginPage> {
 
   void login() async {
     showDialog(context: context,
-        builder: (context) => const Center(
-          child: CircularProgressIndicator(),
-        ),
+      builder: (context) =>
+      const Center(
+        child: CircularProgressIndicator(),
+      ),
     );
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailTextController.text,
+          password: passwordTextController.text);
+
+      if(context.mounted) Navigator.pop(context);
+
+    } on FirebaseAuthException catch(e) {
+      Navigator.pop(context);
+      displayMsgToUser(e.code, context);
+    }
   }
 
   @override

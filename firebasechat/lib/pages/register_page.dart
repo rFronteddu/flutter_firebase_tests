@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../components/my_button.dart';
 
 import '../components/my_text_field.dart';
+import '../components/my_text_field_credentials.dart';
 import '../services/auth/auth_service.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -64,7 +65,7 @@ class RegisterPage extends StatelessWidget {
             ),
             const SizedBox(height: 50),
 
-            MyTextField(
+            MyTextFieldCredentials(
               hintText: 'Email',
               obscure: false,
               textController: emailTextController,
@@ -73,7 +74,7 @@ class RegisterPage extends StatelessWidget {
             const SizedBox(height: 10),
 
             // pw text-field
-            MyTextField(
+            MyTextFieldCredentials(
               hintText: 'Password',
               obscure: true,
               textController: passwordTextController,
@@ -81,7 +82,7 @@ class RegisterPage extends StatelessWidget {
 
             const SizedBox(height: 10),
 
-            MyTextField(
+            MyTextFieldCredentials(
               hintText: 'Confirm Password',
               obscure: true,
               textController: passwordConfirmTextController,

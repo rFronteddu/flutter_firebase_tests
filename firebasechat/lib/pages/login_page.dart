@@ -1,4 +1,5 @@
-import 'package:firebasechat/components/my_text_field.dart';
+
+import 'package:firebasechat/components/my_text_field_credentials.dart';
 import 'package:flutter/material.dart';
 
 import '../components/my_button.dart';
@@ -54,7 +55,7 @@ class LoginPage extends StatelessWidget {
             ),
             const SizedBox(height: 50),
 
-            MyTextField(
+            MyTextFieldCredentials(
               hintText: 'Email',
               obscure: false,
               textController: emailTextController,
@@ -63,7 +64,7 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 10),
 
             // pw textfield
-            MyTextField(
+            MyTextFieldCredentials(
               hintText: 'Password',
               obscure: true,
               textController: passwordTextController,

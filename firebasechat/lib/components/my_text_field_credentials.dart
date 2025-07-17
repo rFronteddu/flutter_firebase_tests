@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 
-class MyTextField extends StatelessWidget {
+class MyTextFieldCredentials extends StatelessWidget {
   final String hintText;
   final bool obscure;
   final TextEditingController textController;
-  final FocusNode? focusNode;
 
-  const MyTextField({
+  const MyTextFieldCredentials({
     super.key,
     required this.hintText,
     required this.obscure,
     required this.textController,
-    required this.focusNode,
   });
 
   @override
@@ -21,7 +19,6 @@ class MyTextField extends StatelessWidget {
       child: TextField(
         controller: textController,
         obscureText: obscure,
-        focusNode: focusNode,
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
